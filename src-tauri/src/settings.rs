@@ -6,6 +6,11 @@ use std::path::{Path, PathBuf};
 
 const SETTINGS_DIRECTORY: &str = "QuotaStrip";
 const SETTINGS_FILE: &str = "settings.json";
+const CURRENT_SETTINGS_VERSION: u8 = 2;
+
+fn legacy_settings_version() -> u8 {
+    1
+}
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(rename_all = "lowercase")]
@@ -94,6 +99,8 @@ fn theme_from_apps_use_light_theme(value: u32) -> Theme {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(default)]
 pub struct AppSettings {
+    #[serde(default = "legacy_settings_version")]
+    pub version: u8,
     pub start_with_windows: bool,
     pub auto_hide_when_codex_inactive: bool,
     pub hover_expansion_enabled: bool,
@@ -105,13 +112,24 @@ pub struct AppSettings {
 impl Default for AppSettings {
     fn default() -> Self {
         Self {
-            start_with_windows: false,
+            version: CURRENT_SETTINGS_VERSION,
+            start_with_windows: true,
             auto_hide_when_codex_inactive: true,
             hover_expansion_enabled: true,
             position_x_offset: 0,
             position_y_offset: 0,
             theme: Theme::System,
         }
+    }
+}
+
+pub fn migrate_startup_default(mut settings: AppSettings) -> (AppSettings, bool) {
+    if settings.version < CURRENT_SETTINGS_VERSION {
+        settings.version = CURRENT_SETTINGS_VERSION;
+        settings.start_with_windows = true;
+        (settings, true)
+    } else {
+        (settings, false)
     }
 }
 
@@ -176,8 +194,8 @@ fn config_root() -> PathBuf {
 #[cfg(test)]
 mod tests {
     use super::{
-        load_from_path, resolve_theme, save_to_path, theme_from_apps_use_light_theme, AppSettings,
-        Theme,
+        load_from_path, migrate_startup_default, resolve_theme, save_to_path,
+        theme_from_apps_use_light_theme, AppSettings, Theme, CURRENT_SETTINGS_VERSION,
     };
     use std::fs;
     use std::path::PathBuf;
@@ -200,7 +218,8 @@ mod tests {
     fn defaults_are_safe_and_preserve_current_behavior() {
         let settings = AppSettings::default();
 
-        assert!(!settings.start_with_windows);
+        assert_eq!(settings.version, CURRENT_SETTINGS_VERSION);
+        assert!(settings.start_with_windows);
         assert!(settings.auto_hide_when_codex_inactive);
         assert!(settings.hover_expansion_enabled);
         assert_eq!(settings.position_x_offset, 0);
@@ -267,6 +286,7 @@ mod tests {
             .expect("write partial config");
 
         let loaded = load_from_path(&path);
+        assert_eq!(loaded.version, 1);
         assert_eq!(loaded.theme, Theme::Dark);
         assert_eq!(loaded.position_x_offset, 12);
         assert_eq!(loaded.position_y_offset, 0);
@@ -276,9 +296,38 @@ mod tests {
     }
 
     #[test]
+    fn legacy_settings_enable_startup_once_during_migration() {
+        let legacy = AppSettings {
+            version: 1,
+            start_with_windows: false,
+            ..AppSettings::default()
+        };
+
+        let (migrated, changed) = migrate_startup_default(legacy);
+
+        assert!(changed);
+        assert_eq!(migrated.version, CURRENT_SETTINGS_VERSION);
+        assert!(migrated.start_with_windows);
+    }
+
+    #[test]
+    fn current_settings_preserve_a_disabled_startup_preference() {
+        let current = AppSettings {
+            start_with_windows: false,
+            ..AppSettings::default()
+        };
+
+        let (migrated, changed) = migrate_startup_default(current);
+
+        assert!(!changed);
+        assert!(!migrated.start_with_windows);
+    }
+
+    #[test]
     fn save_then_load_preserves_settings_across_restart_boundary() {
         let path = test_path("round-trip");
         let expected = AppSettings {
+            version: CURRENT_SETTINGS_VERSION,
             start_with_windows: true,
             auto_hide_when_codex_inactive: false,
             hover_expansion_enabled: false,

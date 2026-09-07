@@ -7,7 +7,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        QuotaStrip is Windows-first and intentionally narrow for v0.1.0. Describe the user problem before proposing a solution, and do not include private data.
+        QuotaStrip is Windows-first and intentionally narrow for v0.1.1. Describe the user problem before proposing a solution, and do not include private data.
   - type: textarea
     id: problem
     attributes:

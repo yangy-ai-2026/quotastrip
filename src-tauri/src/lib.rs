@@ -8,7 +8,7 @@ pub mod window_geometry;
 pub mod window_tracker;
 
 pub use engine::UsageSnapshot;
-pub use settings::{resolve_theme, AppSettings, Theme};
+pub use settings::{migrate_startup_default, resolve_theme, AppSettings, Theme};
 pub use window_geometry::{
     place_top_center, read_window_geometry, scale_size_for_dpi, NotchPlacement, Rect, WindowDpi,
     WindowGeometrySnapshot, WindowSize,
@@ -46,7 +46,12 @@ fn resolve_startup_settings(mut settings: AppSettings) -> AppSettings {
 
 pub fn run() {
     native_overlay::initialize_dpi_awareness();
-    let loaded_settings = AppSettings::load();
+    let (loaded_settings, migrated) = migrate_startup_default(AppSettings::load());
+    if migrated {
+        if let Err(error) = loaded_settings.save() {
+            eprintln!("failed to save migrated settings: {error}");
+        }
+    }
     let settings = resolve_startup_settings(loaded_settings);
     if let Err(error) = startup::apply(settings.start_with_windows) {
         eprintln!("failed to update Windows startup registration: {error}");

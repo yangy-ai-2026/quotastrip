@@ -3,7 +3,7 @@ import crypto from "node:crypto";
 import path from "node:path";
 
 const root = process.cwd();
-const expectedFilename = "QuotaStrip_0.1.0_x64-setup.exe";
+const expectedFilename = "QuotaStrip_0.1.1_x64-setup.exe";
 const nsisDirectory = path.join(root, "src-tauri", "target", "release", "bundle", "nsis");
 const installerPath = path.join(nsisDirectory, expectedFilename);
 const checksumPath = path.join(nsisDirectory, "SHA256SUMS.txt");
@@ -37,7 +37,7 @@ fs.writeFileSync(checksumPath, checksumLine, "utf8");
 
 const checksumContents = fs.readFileSync(checksumPath, "utf8");
 const checksumMatch = checksumContents.match(
-  /^([0-9a-f]{64})  (QuotaStrip_0\.1\.0_x64-setup\.exe)\n$/,
+  /^([0-9a-f]{64})  (QuotaStrip_0\.1\.1_x64-setup\.exe)\n$/,
 );
 if (!checksumMatch) {
   fail("checksum-file-format-invalid");

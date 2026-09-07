@@ -77,9 +77,11 @@ QuotaStrip keeps a compact usage notch attached to the Codex Desktop window on W
 ## Installation
 
 > [!NOTE]
-> QuotaStrip `v0.1.0` is available from [QuotaStrip v0.1.0](https://github.com/yangy-ai-2026/quotastrip/releases/tag/v0.1.0).
+> QuotaStrip `v0.1.1` is available from [QuotaStrip v0.1.1](https://github.com/yangy-ai-2026/quotastrip/releases/tag/v0.1.1).
 
-Download the Windows NSIS installer `QuotaStrip_0.1.0_x64-setup.exe` and verify it against [SHA256SUMS.txt](https://github.com/yangy-ai-2026/quotastrip/releases/download/v0.1.0/SHA256SUMS.txt) before installation. `v0.1.0` is unsigned, so Windows SmartScreen may display a warning; download only from the official Release and verify the SHA256 checksum.
+Download the Windows NSIS installer `QuotaStrip_0.1.1_x64-setup.exe` and verify it against [SHA256SUMS.txt](https://github.com/yangy-ai-2026/quotastrip/releases/download/v0.1.1/SHA256SUMS.txt) before installation. `v0.1.1` is unsigned, so Windows SmartScreen may display a warning; download only from the official Release and verify the SHA256 checksum.
+
+After its first launch, QuotaStrip starts automatically when the current Windows user signs in. It runs from the system tray and shows the overlay once Codex Desktop is available.
 
 ## How It Works
 
@@ -106,7 +108,7 @@ QuotaStrip reads allowance data through Codex-owned local capabilities, then nor
 - Windows 10 or Windows 11
 - Codex Desktop
 
-QuotaStrip is Windows-first. macOS and Linux are outside the `v0.1.0` scope.
+QuotaStrip is Windows-first. macOS and Linux are outside the `v0.1.1` scope.
 
 ## Privacy
 
@@ -126,19 +128,19 @@ No. QuotaStrip does not collect prompts, conversations, or project code.
 
 ### Does it work on macOS or Linux?
 
-No. `v0.1.0` is Windows-first; macOS and Linux are outside its scope.
+No. `v0.1.1` is Windows-first; macOS and Linux are outside its scope.
 
 ### What happens when Codex is closed?
 
 QuotaStrip needs a detectable Codex Desktop window to attach its overlay. When Codex is opened again, the window tracker can attach to the new window.
 
-### Where will `v0.1.0` be downloaded?
+### Where will `v0.1.1` be downloaded?
 
-Download `v0.1.0` from [QuotaStrip v0.1.0](https://github.com/yangy-ai-2026/quotastrip/releases/tag/v0.1.0), the official GitHub Release.
+Download `v0.1.1` from [QuotaStrip v0.1.1](https://github.com/yangy-ai-2026/quotastrip/releases/tag/v0.1.1), the official GitHub Release.
 
 ### Why might Windows show a SmartScreen warning?
 
-`v0.1.0` is unsigned. Download only from the official GitHub Release and verify the published SHA256 checksum before trusting an installer.
+`v0.1.1` is unsigned. Download only from the official GitHub Release and verify the published SHA256 checksum before trusting an installer.
 
 ## Troubleshooting
 
@@ -152,7 +154,7 @@ Use **Show Overlay** first. If the overlay still does not appear, fully quit Quo
 
 ### I need to verify an installer
 
-Obtain the installer only from [QuotaStrip v0.1.0](https://github.com/yangy-ai-2026/quotastrip/releases/tag/v0.1.0) and compare it with the accompanying `SHA256SUMS.txt` file.
+Obtain the installer only from [QuotaStrip v0.1.1](https://github.com/yangy-ai-2026/quotastrip/releases/tag/v0.1.1) and compare it with the accompanying `SHA256SUMS.txt` file.
 
 ### Windows warns about an installer
 
@@ -162,11 +164,11 @@ Treat SmartScreen or signing warnings cautiously. Do not bypass a warning unless
 
 The Windows CI workflow verifies version consistency, builds the Windows application and NSIS installer, and verifies the installer artifact and SHA256 checksum.
 
-`v0.1.0` is published for Windows. The binary is unsigned, so Windows SmartScreen may display a warning; verify the SHA256 checksum before installation.
+`v0.1.1` is published for Windows. The binary is unsigned, so Windows SmartScreen may display a warning; verify the SHA256 checksum before installation.
 
 ## Roadmap
 
-- `v0.1.0` — Codex usage engine, Windows-attached Notch, hover usage panel, tray controls, and a reproducible Windows NSIS installer.
+- `v0.1.1` — Codex usage engine, Windows-attached Notch, hover usage panel, tray controls, Windows sign-in startup, and a reproducible Windows NSIS installer.
 - Later — stability improvements, broader Windows compatibility, and user-feedback-driven enhancements.
 
 See [ROADMAP.md](ROADMAP.md) for the current public roadmap.

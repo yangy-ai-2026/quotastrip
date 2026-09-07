@@ -1,7 +1,7 @@
 [package]
 name = "quotastrip"
 default-run = "quotastrip"
-version = "0.1.0"
+version = "0.1.1"
 description = "QuotaStrip native application"
 authors = ["QuotaStrip contributors"]
 edition = "2021"

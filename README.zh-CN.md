@@ -77,9 +77,11 @@ QuotaStrip 会将一个紧凑的用量 Notch 贴合在 Windows 上的 Codex Desk
 ## 安装
 
 > [!NOTE]
-> QuotaStrip `v0.1.0` 已正式发布，可从 [QuotaStrip v0.1.0](https://github.com/yangy-ai-2026/quotastrip/releases/tag/v0.1.0) 下载。
+> QuotaStrip `v0.1.1` 已正式发布，可从 [QuotaStrip v0.1.1](https://github.com/yangy-ai-2026/quotastrip/releases/tag/v0.1.1) 下载。
 
-请下载 Windows NSIS 安装程序 `QuotaStrip_0.1.0_x64-setup.exe`，并在安装前使用 [SHA256SUMS.txt](https://github.com/yangy-ai-2026/quotastrip/releases/download/v0.1.0/SHA256SUMS.txt) 验证 SHA256 校验和。`v0.1.0` 未签名，Windows SmartScreen 可能显示警告；请仅从官方 Release 下载并验证 SHA256 校验和。
+请下载 Windows NSIS 安装程序 `QuotaStrip_0.1.1_x64-setup.exe`，并在安装前使用 [SHA256SUMS.txt](https://github.com/yangy-ai-2026/quotastrip/releases/download/v0.1.1/SHA256SUMS.txt) 验证 SHA256 校验和。`v0.1.1` 未签名，Windows SmartScreen 可能显示警告；请仅从官方 Release 下载并验证 SHA256 校验和。
+
+首次启动后，QuotaStrip 会在当前 Windows 用户登录时自动启动。它会驻留在系统托盘中，并在 Codex Desktop 可用后显示悬浮层。
 
 ## 工作原理
 
@@ -106,7 +108,7 @@ QuotaStrip 通过 Codex 自有的本地能力读取额度数据，再经用量 /
 - Windows 10 或 Windows 11
 - Codex Desktop
 
-QuotaStrip 以 Windows 为先；macOS 和 Linux 不在 `v0.1.0` 范围内。
+QuotaStrip 以 Windows 为先；macOS 和 Linux 不在 `v0.1.1` 范围内。
 
 ## 隐私
 
@@ -126,19 +128,19 @@ QuotaStrip 采用本地优先设计，不收集提示词（prompts）、对话�
 
 ### 支持 macOS 或 Linux 吗？
 
-不支持。`v0.1.0` 以 Windows 为先，macOS 和 Linux 不在当前范围内。
+不支持。`v0.1.1` 以 Windows 为先，macOS 和 Linux 不在当前范围内。
 
 ### Codex 关闭后会怎样？
 
 QuotaStrip 需要检测到 Codex Desktop 窗口才能贴合悬浮层。重新打开 Codex 后，窗口跟踪器可以贴合到新的窗口。
 
-### `v0.1.0` 将从哪里下载？
+### `v0.1.1` 将从哪里下载？
 
-请从 [QuotaStrip v0.1.0](https://github.com/yangy-ai-2026/quotastrip/releases/tag/v0.1.0) 下载，这是官方 GitHub Release。
+请从 [QuotaStrip v0.1.1](https://github.com/yangy-ai-2026/quotastrip/releases/tag/v0.1.1) 下载，这是官方 GitHub Release。
 
 ### 为什么 Windows 可能显示 SmartScreen 警告？
 
-`v0.1.0` 未签名。请仅从官方 GitHub Release 下载，并在信任安装程序前验证已发布的 SHA256 校验和。
+`v0.1.1` 未签名。请仅从官方 GitHub Release 下载，并在信任安装程序前验证已发布的 SHA256 校验和。
 
 ## 故障排查
 
@@ -152,7 +154,7 @@ QuotaStrip 需要检测到 Codex Desktop 窗口才能贴合悬浮层。重新打
 
 ### 我需要验证安装程序
 
-请仅从 [QuotaStrip v0.1.0](https://github.com/yangy-ai-2026/quotastrip/releases/tag/v0.1.0) 获取安装程序，并与随附的 `SHA256SUMS.txt` 文件比对。
+请仅从 [QuotaStrip v0.1.1](https://github.com/yangy-ai-2026/quotastrip/releases/tag/v0.1.1) 获取安装程序，并与随附的 `SHA256SUMS.txt` 文件比对。
 
 ### Windows 对安装程序发出警告
 
@@ -162,11 +164,11 @@ QuotaStrip 需要检测到 Codex Desktop 窗口才能贴合悬浮层。重新打
 
 Windows CI 工作流会验证版本一致性、构建 Windows 应用和 NSIS 安装程序，并验证安装程序产物及 SHA256 校验和。
 
-`v0.1.0` 已面向 Windows 发布。二进制文件未签名，Windows SmartScreen 可能显示警告；请在安装前验证 SHA256 校验和。
+`v0.1.1` 已面向 Windows 发布。二进制文件未签名，Windows SmartScreen 可能显示警告；请在安装前验证 SHA256 校验和。
 
 ## 路线图
 
-- `v0.1.0` — Codex 用量引擎、贴合 Windows 窗口的 Notch、悬停用量面板、托盘控制，以及可复现的 Windows NSIS 安装程序。
+- `v0.1.1` — Codex 用量引擎、贴合 Windows 窗口的 Notch、悬停用量面板、托盘控制、Windows 登录自启动，以及可复现的 Windows NSIS 安装程序。
 - 后续 — 稳定性改进、更广泛的 Windows 兼容性，以及由用户反馈驱动的增强。
 
 请参阅 [ROADMAP.md](ROADMAP.md) 了解当前公开路线图。
